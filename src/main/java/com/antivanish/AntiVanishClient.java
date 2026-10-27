@@ -10,7 +10,6 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.PlayerSkinDrawer;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.entity.player.SkinTextures;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -59,13 +58,13 @@ public class AntiVanishClient implements ClientModInitializer {
 
             String name = p.getName().getString();
             mc.inGameHud.getChatHud().addMessage(Text.literal("\u00a7c[AntiVanish] \u00a7f" + name + " \u00a7cis in your render distance!"));
-            mc.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f));
+            mc.player.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
 
             if (!targetName.isBlank() && name.equalsIgnoreCase(targetName.trim())) {
                 effectSkin = p.getSkin();
                 effectStart = System.currentTimeMillis();
                 // Same sound as the Mining Fatigue elder guardian curse
-                mc.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.ENTITY_ELDER_GUARDIAN_CURSE, 1.0f, 1.0f));
+                mc.player.playSound(SoundEvents.ENTITY_ELDER_GUARDIAN_CURSE, 1.0f, 1.0f);
             }
         }
         inRange.clear();
